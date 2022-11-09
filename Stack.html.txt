@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Document</title>
+<style>
+   body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+   }
+   .result {
+      font-size: 18px;
+      font-weight: 500;
+      color: blueviolet;
+   }
+   button {
+      padding: 6px;
+      margin: 4px;
+   }
+</style>
+</head>
+<body>
+<h1>Implementation of Stack in JavaScript.</h1>
+<div class="result"></div>
+<br />
+<input type="text" class="stackPush" /><button class="pushBtn">Push</button>
+<button class="popBtn">Pop</button>
+<button class="Btn">Display</button>
+<h3>Click on the above buttons to perform stack operations</h3>
+<script>
+   let resEle = document.querySelector(".result");
+   let BtnEle = document.querySelector(".Btn");
+   let pushBtnEle = document.querySelector(".pushBtn");
+   let popBtnEle = document.querySelector(".popBtn");
+   class Stack {
+      constructor() {
+         this.items = [];
+         this.top = 0;
+      }
+   }
+   Stack.prototype.push = function (ele) {
+      this.items[this.top] = ele;
+      this.top += 1;
+   };
+   Stack.prototype.pop = function () {
+      if (this.top === 0) {
+         return "Underflow: no more elements to delete";
+      }
+      tempNum = this.items[this.top - 1];
+      this.items.length -= 1;
+      return tempNum;
+   };
+   Stack.prototype.display = function () {
+      if (this.top == 0) {
+         return "Stack is empty";
+      }
+      for (let i = 0; i < this.top; i++) {
+         resEle.innerHTML += this.items[i] + " , ";
+      }
+   };
+   let stack1 = new Stack();
+   BtnEle.addEventListener("click", () => {
+      resEle.innerHTML = "";
+      stack1.display();
+   });
+   pushBtnEle.addEventListener("click", () => {
+      let ele = document.querySelector(".stackPush").value;
+      resEle.innerHTML = ele + " is pushed to the stack";
+      stack1.push(ele);
+   });
+   popBtnEle.addEventListener("click", () => {
+      resEle.innerHTML = stack1.pop() + " is popped from the stack";
+   });
+</script>
+</body>
+</html>
